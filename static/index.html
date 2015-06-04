@@ -1,0 +1,22 @@
+<meta charset='utf-8'/>
+<script>
+function connect(host,port){
+    var url = "ws://" + location.host + "/socket";
+    var socket = new WebSocket(url+'?host='+host+'&port='+port);
+    socket.onopen=function(){
+        console.log('connection success');
+    }
+    socket.onmessage = function(event) {
+        console.log(event.data);
+    }
+    socket.onclose=function(){
+        console.log('connection close');
+    }
+    return socket;
+}
+var socket=connect('127.0.0.1',6379);
+
+function send(msg){
+    socket.send(msg);
+}
+</script>
